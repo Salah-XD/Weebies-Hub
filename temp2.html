@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login and Sign Up</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        position: relative;
+        max-width: 400px;
+        padding: 40px;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #888;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 0;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 10px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .toggle-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .toggle-button {
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        flex: 1;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .toggle-button.active {
+        border-bottom-color: #357ae8;
+      }
+
+      .google-btn {
+        background-color: #fff;
+        color: #757575;
+        padding: 12px 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .google-btn:hover {
+        border-color: #aaa;
+      }
+
+      .google-logo {
+        width: 18px;
+        height: 18px;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".toggle-button").click(function () {
+          var $this = $(this);
+          $(".toggle-button").removeClass("active");
+          $this.addClass("active");
+          $(".login-form, .signup-form").slideToggle();
+          var toggleText = $this.text();
+          $("h2").text(toggleText);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <button class="close-btn" onclick="closeContainer()">×</button>
+
+      <div class="toggle-container">
+        <div class="toggle-button active" style="margin-right: 5px">Login</div>
+        <div class="toggle-button" style="margin-left: 5px">Sign Up</div>
+      </div>
+
+      <form class="login-form">
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <input type="submit" value="Login" />
+      </form>
+
+      <form class="signup-form" style="display: none">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <input type="submit" value="Sign Up" />
+      </form>
+
+      <div class="google-login">
+        <button class="google-btn">
+          <img
+            class="google-logo"
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            alt="Google Logo"
+          />
+          Continue with Google
+        </button>
+      </div>
+
+      <script>
+        function closeContainer() {
+          document.querySelector(".container").style.display = "none";
+        }
+      </script>
+    </div>
+  </body>
+</html>
