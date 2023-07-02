@@ -538,9 +538,13 @@
           $("h2").text(toggleText);
         });
       });
+
+      // document.addEventListener("click", function poppy() {
+      //   document.querySelector(".popup-container").style.display = "block";
+      // });
     </script>
 
-    <div class="popup-container ttr">
+    <div class="popup-container ttr" onlick="popup()">
       <button class="close-btn ttr" onclick="closeContainer()">×</button>
 
       <div class="toggle-container ttr">
@@ -651,6 +655,9 @@
       <script>
         function closeContainer() {
           document.querySelector(".popup-container").style.display = "none";
+        }
+        function poppy() {
+          document.querySelector(".popup-container").style.display = "block";
         }
       </script>
     </div>
@@ -1207,7 +1214,7 @@
                 "
                 class="navbar-icons-container"
               >
-                <i class="fa-regular fa-user"></i>
+                <i class="fa-regular fa-user" onclick="poppy()"></i>
               </div>
             </div>
             <nav role="navigation" class="nav-menu w-nav-menu">
