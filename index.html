@@ -449,7 +449,7 @@
         var profilePic = credential.profilePicture;
 
         // Update the content of the login-details div
-        var loginDetailsDiv = document.getElementById("login-details");
+        var data = document.getElementById("data");
         data.innerHTML = `
       <div class="profile-details">
           <img
@@ -663,7 +663,7 @@
         data-onsuccess="onSignIn"
       ></div>
 
-      <div class="data">
+      <div class="data" id="data">
         <!-- <h2 class="ttr">Profile Details</h2> -->
         <!-- <div class="profile-details">
           <img
