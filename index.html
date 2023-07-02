@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- This site was created in Webflow. https://www.webflow.com --><!-- Last Published: Thu Jan 26 2023 13:43:39 GMT+0000 (Coordinated Universal Time) -->
+<!-- important lines: -->
 <html
   data-wf-domain="az-milano.webflow.io"
   data-wf-page="62f3719eed27635eee6eeb4f"
@@ -28,6 +28,12 @@
       content="Milano - Webflow Ecommerce website template"
       property="twitter:description"
     />
+    <meta
+      name="google-signin-client_id"
+      content="897348387103-gun9m95dlc8m3f7mt7upv8517g5uqnuk.apps.googleusercontent.com"
+    />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <script
       src="https://kit.fontawesome.com/95346ea11f.js"
       crossorigin="anonymous"
@@ -423,6 +429,218 @@
     </script>
   </head>
   <body>
+    <style>
+      .popup-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 400px;
+        padding: 40px;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #888;
+      }
+
+      .toggle-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .toggle-button {
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        flex: 1;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .toggle-button.active {
+        border-bottom-color: #357ae8;
+      }
+
+      .signup-form {
+        display: none;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      .sbnt {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .data {
+        margin-top: 19px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .profile-details {
+        margin-bottom: 10px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".toggle-button").click(function () {
+          var $this = $(this);
+          $(".toggle-button").removeClass("active");
+          $this.addClass("active");
+          $(".login-form, .signup-form").slideToggle();
+          var toggleText = $this.text();
+          $("h2").text(toggleText);
+        });
+      });
+    </script>
+
+    <div class="popup-container ttr">
+      <button class="close-btn ttr" onclick="closeContainer()">×</button>
+
+      <div class="toggle-container ttr">
+        <div
+          class="toggle-button active ttr"
+          style="margin-right: 5px; padding-bottom: 10px"
+        >
+          Login
+        </div>
+        <div class="toggle-button ttr" style="margin-left: 5px">Sign Up</div>
+      </div>
+
+      <form class="login-form ttr">
+        <label class="ttr" for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <label class="ttr" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <input class="sbnt" type="submit" value="Login" />
+      </form>
+
+      <form class="signup-form ttr">
+        <label class="ttr" for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+        <label class="ttr" for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <label class="ttr" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <input class="sbnt" type="submit" value="Sign Up" />
+      </form>
+
+      <div
+        style="
+          margin-top: 19px;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        "
+        class="g-signin2 ttr"
+        data-onsuccess="onSignIn"
+      ></div>
+
+      <div class="data">
+        <!-- <h2 class="ttr">Profile Details</h2> -->
+        <div class="profile-details">
+          <img
+            id="image"
+            src=""
+            alt=""
+            style="border-radius: 50%; width: 100px; height: 100px"
+          />
+        </div>
+        <div class="profile-details">
+          <label class="ttr" for="name">Konichiwa</label>
+          <span id="name"></span>
+        </div>
+        <div class="profile-details">
+          <label class="ttr" for="email"></label>
+          <span id="email"></span>
+        </div>
+        <button
+          type="button"
+          onclick="signout()"
+          class="ttr"
+          style="
+            margin-top: 10px;
+            color: #fff;
+            background: crimson;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          signOut
+        </button>
+      </div>
+
+      <script>
+        function closeContainer() {
+          document.querySelector(".popup-container").style.display = "none";
+        }
+      </script>
+    </div>
     <div
       data-w-id="0822006c-364b-ff71-7102-f629c8b2c373"
       style="opacity: 1"
