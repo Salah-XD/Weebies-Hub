@@ -255,7 +255,7 @@
     </div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script>
+  <!-- <script>
     function onSignIn(googleUser) {
       var profile = googleUser.getBasicProfile();
       console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -268,5 +268,23 @@
       $(".data").css("display", "block");
       $(".ttr").css("display", "none");
     }
+  </script> -->
+
+  <script>
+    document.addEventListener(
+      "DOMContentLoaded",
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId());
+        console.log("Name: " + profile.getName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+        document.getElementById("image").src = profile.getImageUrl();
+        document.getElementById("name").textContent = profile.getName();
+        document.getElementById("email").textContent = profile.getEmail();
+        document.querySelector(".data").style.display = "block";
+        document.querySelector(".ttr").style.display = "none";
+      }
+    );
   </script>
 </html>
