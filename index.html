@@ -614,7 +614,7 @@
           width: 100%;
         "
         class="g-signin2 ttr"
-        onclick="onSignIn()"
+        data-onsuccess="onSignIn"
       ></div>
 
       <div class="data" id="login-details">
@@ -676,6 +676,12 @@
         //   <p>Name: ${name}</p>
         // `;
         //     }
+
+        google.accounts.id.initialize({
+          client_id:
+            "897348387103-gun9m95dlc8m3f7mt7upv8517g5uqnuk.apps.googleusercontent.com",
+          callback: onSignIn,
+        });
 
         function onSignIn(googleUser) {
           // Get the user profile information
