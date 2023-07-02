@@ -132,9 +132,9 @@
   </head>
   <body>
     <div class="container">
-      <button class="close-btn" onclick="closeContainer()">×</button>
+      <button class="close-btn ttr" onclick="closeContainer()">×</button>
 
-      <div class="toggle-container">
+      <div class="toggle-container ttr">
         <div
           class="toggle-button active"
           style="margin-right: 5px; padding-bottom: 10px"
@@ -144,7 +144,7 @@
         <div class="toggle-button" style="margin-left: 5px">Sign Up</div>
       </div>
 
-      <form class="login-form">
+      <form class="login-form ttr">
         <label for="email">Email</label>
         <input
           type="text"
@@ -164,7 +164,7 @@
         <input type="submit" value="Login" />
       </form>
 
-      <form class="signup-form" style="display: none">
+      <form class="signup-form ttr" style="display: none">
         <label for="name">Name</label>
         <input
           type="text"
@@ -209,7 +209,7 @@
           justify-content: center;
           width: 100%;
         "
-        class="g-signin2"
+        class="g-signin2 ttr"
         data-onsuccess="onSignIn"
       ></div>
       <div class="data">
@@ -262,6 +262,11 @@
       console.log("Name: " + profile.getName());
       console.log("Image URL: " + profile.getImageUrl());
       console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+      $("#image").attr("src", profile.getImageUrl());
+      $("#name").text(profile.getName());
+      $("#email").text(profile.getEmail());
+      $(".data").css("display", "block");
+      $(".ttr").css("display", "none");
     }
   </script>
 </html>
