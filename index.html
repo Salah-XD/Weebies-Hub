@@ -619,7 +619,7 @@
 
       <div class="data" id="login-details">
         <!-- <h2 class="ttr">Profile Details</h2> -->
-        <!-- <div class="profile-details">
+        <div class="profile-details">
           <img
             id="image"
             src=""
@@ -650,7 +650,7 @@
           "
         >
           signOut
-        </button> -->
+        </button>
       </div>
 
       <script>
@@ -660,21 +660,40 @@
         function poppy() {
           document.querySelector(".popup-container").style.display = "block";
         }
-        function onSignIn(response) {
-          var credential = response.credential;
+        //     function onSignIn(response) {
+        //       var credential = response.credential;
 
-          // Extract the desired user information from the credential object
-          var email = credential.id;
-          var name = credential.displayName;
-          var profilePic = credential.profilePicture;
+        //       // Extract the desired user information from the credential object
+        //       var email = credential.id;
+        //       var name = credential.displayName;
+        //       var profilePic = credential.profilePicture;
+
+        //       // Update the content of the login-details div
+        //       var loginDetailsDiv = document.getElementById("login-details");
+        //       loginDetailsDiv.innerHTML = `
+        //   <img src="${profilePic}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
+        //   <p>Email: ${email}</p>
+        //   <p>Name: ${name}</p>
+        // `;
+        //     }
+
+        function onSignIn(googleUser) {
+          // Get the user profile information
+          var profile = googleUser.getBasicProfile();
+
+          // Extract the desired user information
+          var email = profile.getEmail();
+          var name = profile.getName();
+          var imageUrl = profile.getImageUrl();
 
           // Update the content of the login-details div
-          var loginDetailsDiv = document.getElementById("login-details");
-          loginDetailsDiv.innerHTML = `
-      <img src="${profilePic}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
-      <p>Email: ${email}</p>
-      <p>Name: ${name}</p>
-    `;
+          var nameElement = document.getElementById("name");
+          var emailElement = document.getElementById("email");
+          var imageElement = document.getElementById("image");
+
+          nameElement.textContent = name;
+          emailElement.textContent = email;
+          imageElement.src = imageUrl;
         }
       </script>
     </div>
