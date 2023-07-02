@@ -2,6 +2,12 @@
 <html>
   <head>
     <title>Login and Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-signin-client_id"
+      content="897348387103-gun9m95dlc8m3f7mt7upv8517g5uqnuk.apps.googleusercontent.com"
+    />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -36,7 +42,7 @@
         text-align: center;
         margin-top: 0;
         border-bottom: 2px solid #ccc;
-        padding-bottom: 10px;
+        padding: 40px;
       }
 
       label {
@@ -106,6 +112,9 @@
         vertical-align: middle;
         margin-right: 8px;
       }
+      .data {
+        display: none;
+      }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -126,12 +135,17 @@
       <button class="close-btn" onclick="closeContainer()">×</button>
 
       <div class="toggle-container">
-        <div class="toggle-button active" style="margin-right: 5px">Login</div>
+        <div
+          class="toggle-button active"
+          style="margin-right: 5px; padding-bottom: 10px"
+        >
+          Login
+        </div>
         <div class="toggle-button" style="margin-left: 5px">Sign Up</div>
       </div>
 
       <form class="login-form">
-        <label for="email">Email:</label>
+        <label for="email">Email</label>
         <input
           type="text"
           id="email"
@@ -139,7 +153,7 @@
           placeholder="Enter your email"
           required
         />
-        <label for="password">Password:</label>
+        <label for="password">Password</label>
         <input
           type="password"
           id="password"
@@ -151,7 +165,7 @@
       </form>
 
       <form class="signup-form" style="display: none">
-        <label for="name">Name:</label>
+        <label for="name">Name</label>
         <input
           type="text"
           id="name"
@@ -159,7 +173,7 @@
           placeholder="Enter your name"
           required
         />
-        <label for="email">Email:</label>
+        <label for="email">Email</label>
         <input
           type="text"
           id="email"
@@ -167,7 +181,7 @@
           placeholder="Enter your email"
           required
         />
-        <label for="password">Password:</label>
+        <label for="password">Password</label>
         <input
           type="password"
           id="password"
@@ -178,7 +192,7 @@
         <input type="submit" value="Sign Up" />
       </form>
 
-      <div class="google-login">
+      <!-- <div class="google-login" style="margin-top: 10px">
         <button class="google-btn">
           <img
             class="google-logo"
@@ -187,8 +201,52 @@
           />
           Continue with Google
         </button>
+      </div> -->
+      <div
+        style="
+          margin-top: 19px;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        "
+        class="g-signin2"
+        data-onsuccess="onSignIn"
+      ></div>
+      <div class="data">
+        <!-- <h2>Profile Details</h2> -->
+        <div class="profile-details">
+          <img
+            id="image"
+            src=""
+            alt=""
+            style="border-radius: 50%; width: 100; height: 100"
+          />
+        </div>
+        <div class="profile-details">
+          <label for="name">Konichiwa </label>
+          <span id="name"></span>
+        </div>
+        <div class="profile-details">
+          <label for="email"></label>
+          <span id="email"></span>
+        </div>
+        <button
+          type="button"
+          onclick="signout()"
+          style="
+            float: center;
+            margin: auto;
+            color: #fff;
+            background: crimson;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          signOut
+        </button>
       </div>
-
       <script>
         function closeContainer() {
           document.querySelector(".container").style.display = "none";
@@ -196,4 +254,14 @@
       </script>
     </div>
   </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script>
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log("Name: " + profile.getName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+  </script>
 </html>
