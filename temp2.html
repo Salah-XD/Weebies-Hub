@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login and Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-signin-client_id"
+      content="897348387103-gun9m95dlc8m3f7mt7upv8517g5uqnuk.apps.googleusercontent.com"
+    />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        position: relative;
+        max-width: 400px;
+        padding: 40px;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #888;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 0;
+        border-bottom: 2px solid #ccc;
+        padding: 40px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .toggle-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .toggle-button {
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        flex: 1;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .toggle-button.active {
+        border-bottom-color: #357ae8;
+      }
+
+      .google-btn {
+        background-color: #fff;
+        color: #757575;
+        padding: 12px 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .google-btn:hover {
+        border-color: #aaa;
+      }
+
+      .google-logo {
+        width: 18px;
+        height: 18px;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+      .data {
+        display: none;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".toggle-button").click(function () {
+          var $this = $(this);
+          $(".toggle-button").removeClass("active");
+          $this.addClass("active");
+          $(".login-form, .signup-form").slideToggle();
+          var toggleText = $this.text();
+          $("h2").text(toggleText);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <button class="close-btn ttr" onclick="closeContainer()">×</button>
+
+      <div class="toggle-container ttr">
+        <div
+          class="toggle-button active"
+          style="margin-right: 5px; padding-bottom: 10px"
+        >
+          Login
+        </div>
+        <div class="toggle-button" style="margin-left: 5px">Sign Up</div>
+      </div>
+
+      <form class="login-form ttr">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <input type="submit" value="Login" />
+      </form>
+
+      <form class="signup-form ttr" style="display: none">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <input type="submit" value="Sign Up" />
+      </form>
+
+      <!-- <div class="google-login" style="margin-top: 10px">
+        <button class="google-btn">
+          <img
+            class="google-logo"
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            alt="Google Logo"
+          />
+          Continue with Google
+        </button>
+      </div> -->
+      <div
+        style="
+          margin-top: 19px;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        "
+        class="g-signin2 ttr"
+        data-onsuccess="onSignIn"
+      ></div>
+      <div class="data">
+        <!-- <h2>Profile Details</h2> -->
+        <div class="profile-details">
+          <img
+            id="image"
+            src=""
+            alt=""
+            style="border-radius: 50%; width: 100; height: 100"
+          />
+        </div>
+        <div class="profile-details">
+          <label for="name">Konichiwa </label>
+          <span id="name"></span>
+        </div>
+        <div class="profile-details">
+          <label for="email"></label>
+          <span id="email"></span>
+        </div>
+        <button
+          type="button"
+          onclick="signout()"
+          style="
+            float: center;
+            margin: auto;
+            color: #fff;
+            background: crimson;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          signOut
+        </button>
+      </div>
+      <script>
+        function closeContainer() {
+          document.querySelector(".container").style.display = "none";
+        }
+      </script>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <!-- <script>
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log("Name: " + profile.getName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+      $("#image").attr("src", profile.getImageUrl());
+      $("#name").text(profile.getName());
+      $("#email").text(profile.getEmail());
+      $(".data").css("display", "block");
+      $(".ttr").css("display", "none");
+    }
+  </script> -->
+
+  <script>
+    document.addEventListener(
+      "DOMContentLoaded",
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId());
+        console.log("Name: " + profile.getName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+        document.getElementById("image").src = profile.getImageUrl();
+        document.getElementById("name").textContent = profile.getName();
+        document.getElementById("email").textContent = profile.getEmail();
+        document.querySelector(".data").style.display = "block";
+        document.querySelector(".ttr").style.display = "none";
+      }
+    );
+  </script>
+</html>

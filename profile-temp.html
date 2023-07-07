@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        max-width: 400px;
+        padding: 40px;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .profile-details {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Profile Details</h2>
+      <div class="profile-details">
+        <label for="name">Name:</label>
+        <span id="name"></span>
+      </div>
+      <div class="profile-details">
+        <label for="email">Email:</label>
+        <span id="email"></span>
+      </div>
+
+      <script>
+        // Function to parse query parameters from URL
+        function getQueryParams(url) {
+          var params = {};
+          var parser = document.createElement("a");
+          parser.href = url;
+          var query = parser.search.substring(1);
+          var vars = query.split("&");
+          for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            var key = decodeURIComponent(pair[0]);
+            var value = decodeURIComponent(pair[1]);
+            params[key] = value;
+          }
+          return params;
+        }
+
+        // Fetching query parameters from URL
+        var queryParams = getQueryParams(window.location.href);
+
+        // Displaying profile details on the page
+        document.getElementById("name").textContent = queryParams.name;
+        document.getElementById("email").textContent = queryParams.email;
+      </script>
+    </div>
+  </body>
+</html>
